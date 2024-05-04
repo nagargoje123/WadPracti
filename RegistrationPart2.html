@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <title>Registration Form</title>
+    
+</head>
+<body>
+    
+<div class="main">
+        <h2>User Registration</h2>
+        <form>
+            <div>
+                <label for="name">Name</label>
+                <input type="text"  placeholder="Enter your Name" id="name">
+            </div><br>
+            <div>
+                <label for="email">Email</label>
+                <input type="tel" placeholder="Enter Your Email" id="email">
+            </div><br>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password">
+            </div>
+            <div>
+                
+                <button onClick="SaveData()">Sumbit</button>
+            </div>
+        </form>
+
+        </div>
+    
+    
+</body>
+<script>
+    function SaveData()
+    {
+        
+        let name,email,password;
+        name=document.getElementById("name").value;
+        email=document.getElementById("email").value;
+     
+        password=document.getElementById("password").value;
+        let user_records = new Array();
+        user_records = JSON.parse(localStorage.getItem("users")) ? JSON.parse(localStorage.getItem("users")) : []
+        if(user_records.some((v) => {
+            return v.email == email
+        }))
+        {
+            alert("Dupicate Data");
+        }
+        else
+        {
+            user_records.push(
+                {
+                   "name": name,
+                   "email": email,
+                   "password": password 
+                }
+            )
+            localStorage.setItem("users", JSON.stringify(user_records));
+        }
+
+  }
+    
+       
+</script>
+</html>
